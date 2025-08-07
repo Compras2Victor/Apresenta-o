@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatórios Zoho - Tela Cheia</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    iframe.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <iframe id="viewer" src=""></iframe>
+
+  <script>
+    const links = [
+      "https://analytics.zoho.com/open-view/2895218000002804090",
+      "https://analytics.zoho.com/open-view/2895218000002829277",
+      "https://analytics.zoho.com/open-view/2895218000001552299"
+    ];
+
+    const iframe = document.getElementById('viewer');
+    let currentIndex = 0;
+
+    function showNextLink() {
+      iframe.classList.remove('visible');
+
+      setTimeout(() => {
+        iframe.src = links[currentIndex];
+        setTimeout(() => {
+          iframe.classList.add('visible');
+        }, 500);
+
+        currentIndex = (currentIndex + 1) % links.length;
+      }, 1000);
+    }
+
+    showNextLink();
+    setInterval(showNextLink, 60000); // 1 minuto
+  </script>
+</body>
+</html>
